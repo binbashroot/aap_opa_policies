@@ -14,6 +14,16 @@ Requirements
 | **Ansible Automation Platform** | Version `2.6-9` or higher | Must have OPA Integration enabled under settings. |
 | **AAP Authentication** | Service Account / Local User | Requires **Auditor** privileges to read execution data. |
 
+
+Adjustable Variables
+------------
+| Variable Name | Default | Notes / Configuration |
+| :--- | :--- | :--- |
+| max_hosts | 10000 | Max amount of hosts allowed in an individual inventory |
+| base_url | "https://REPLACE_WITH_YOUR_AAP_MAIN_URL/api/controller/v2" | AAP url to connect for dynamic queries |
+| token | data.secrets.aap_controller_bearer_token | See secrets.json |
+
+
 Policies
 ------------
 
@@ -21,12 +31,14 @@ Policies
 - Loads your AAP specific policies for checking
 
 ##### fqdn.rego
-- Ensures < 10000 hosts exist in inventory
+- Ensures a defined max of hosts allowed in an inventory (default 10k)
 - Ensures inventory hostname is RFC 1123 and RFC 921 compliant.
 - Should be set at the organization level but can be done globally
 
 Installation
 ------------
+> ⚠️ **Note:** This document does not cover troubleshooing of OPA rego files. Validate your content before publishing.
+
 ```text
 Recommended OPA folder structure
 |-- policies/
@@ -48,8 +60,14 @@ Recommended OPA folder structure
 4. Create your secrets.json with the token that was created. Refer to the [example](secrets.json) file provided.
   - File should be only user read/write (chmod 600)  
   - File should be in at the root level of the OPA policy folder
-6. Modify the base_url variable in the fqdn.rego file with the your AAP url
-7. Modify the max_hosts variable in the fqdn.rego file with the max amount of hosts allowed in a single inventory
+5. Modify the base_url variable in the fqdn.rego file with the your AAP url
+6. Modify the max_hosts variable in the fqdn.rego file with the max amount of hosts allowed in a single inventory
+
+#### Publish the rego code 
+7. Publish your modified fqdn.rego file to the `<root_policy_directory>/aap` folder of the OPA server
+** 
+
+
 
 Configure Policy Enforcement in AAP 
 ------------

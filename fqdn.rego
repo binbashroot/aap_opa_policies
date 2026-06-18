@@ -3,11 +3,15 @@ package aap.fqdn
 import rego.v1
 
 # Configuration
+# Adjustable variables
+max_hosts := 10000
 base_url := "https://REPLACE_WITH_YOUR_AAP_MAIN_URL/api/controller/v2"
 token := data.secrets.aap_controller_bearer_token
+
+# Static variables
+# Do not modify
 auth_header := sprintf("Bearer %v", [token])
 fqdn_regex := `^([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,63}$`
-max_hosts := 10000
 
 # Helper: Regex match checks
 valid_hostname(h) if h == "localhost"
