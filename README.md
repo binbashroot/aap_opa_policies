@@ -1,16 +1,18 @@
 AAP OPA Policies
 =======
 
-A repository of OPA Policies to be used within Ansible Automation Platform  
-
+OPA Policy-as-Code guardrails for Ansible Automation Platform.
 *** This document does not cover the installation or configuration of OPA. ***
 
 Requirements
 ------------
 
-- An OPA server configured with an "aap" folder for AAP policy checks
-- **AAP 2.6-9 or higher*** and configured to use OPA
-- Service Account or local user with auditor privileges
+| Component | Minimum Requirement | Notes / Configuration |
+| :--- | :--- | :--- |
+| **Open Policy Agent (OPA)** | Version `1.17.1` or higher | Must be running as an accessible endpoint or sidecar. |
+| **OPA Directory Structure** | Subdirectory: `<root_policy_directory>/aap/` | Must be created inside the root policy folder to house your Rego files. |
+| **Ansible Automation Platform** | Version `2.6-9` or higher | Must have OPA Integration enabled under settings. |
+| **AAP Authentication** | Service Account / Local User | Requires **Auditor** privileges to read execution data. |
 
 Policies
 ------------
