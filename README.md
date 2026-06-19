@@ -11,7 +11,7 @@ Requirements
 | :--- | :--- | :--- |
 | **Open Policy Agent (OPA)** | Version `1.17.1` or higher | Must be running as an accessible endpoint or sidecar. |
 | **OPA Directory Structure** | Subdirectory: `<root_policy_directory>/aap/` | Must be created inside the root policy folder to house your Rego files. |
-| **Ansible Automation Platform** | Version `2.6-9` or higher | Must have OPA Integration enabled under settings. |
+| **Ansible Automation Platform** | `>= 2.6-9` | OPA Integration must enabled under settings. |
 | **AAP Authentication** | Service Account / Local User | Requires **Auditor** privileges to read execution data. |
 
 
@@ -57,13 +57,13 @@ Recommended OPA folder structure
 3. Generate a Personal Access token for that service account
 
 #### On OPA Server
-4. Create your secrets.json with the token that was created. Refer to the [example](secrets.json) file provided.
+##### secrets.json
+4. Create your *secrets.json* with the token that was created. Refer to the [example](secrets.json) file provided.
   - File should be only user read/write (chmod 600)  
-  - File should be in at the root level of the OPA policy folder
+  - File should be place at the root policy directory <root_policy_dir>/secrets.json   
+#### On your local machine
 5. Modify the base_url variable in the fqdn.rego file with the your AAP url
 6. Modify the max_hosts variable in the fqdn.rego file with the max amount of hosts allowed in a single inventory
-
-#### Publish the rego code 
 7. Publish your modified fqdn.rego file to the `<root_policy_directory>/aap` folder of the OPA server
 ** 
 

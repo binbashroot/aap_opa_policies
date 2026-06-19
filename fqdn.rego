@@ -6,6 +6,9 @@ import rego.v1
 # Adjustable variables
 max_hosts := 10000
 base_url := "https://REPLACE_WITH_YOUR_AAP_MAIN_URL/api/controller/v2"
+# Note:
+# "aap_controller_bearer_token" matches the key name
+# from the secrets.json file for the token variable below 
 token := data.secrets.aap_controller_bearer_token
 
 # Static variables
